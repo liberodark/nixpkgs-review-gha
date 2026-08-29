@@ -42,7 +42,7 @@ on:
           - yes_sandbox_relaxed
           - yes_sandbox_true
       riscv64-linux:
-        description: "Build on riscv64-linux (RISE runners)"
+        description: "Build on riscv64-linux (K3 self-hosted runner)"
         required: true
         type: boolean
         default: false
@@ -83,7 +83,7 @@ jobs:
       || (matrix.system == 'aarch64-linux' && 'ubuntu-24.04-arm')
       || (matrix.system == 'x86_64-darwin' && 'macos-latest')
       || (matrix.system == 'aarch64-darwin' && 'macos-latest')
-      || (matrix.system == 'riscv64-linux' && 'ubuntu-24.04-riscv') }}
+      || (matrix.system == 'riscv64-linux' && 'riscv64') }}
 
     steps:
       - uses: actions/checkout@v6
