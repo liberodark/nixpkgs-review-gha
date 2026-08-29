@@ -10,6 +10,11 @@ runs:
       run: |
         set -euo pipefail
 
+        if command -v nu >/dev/null; then
+          echo "nu $(nu --version) already provided by the host"
+          exit 0
+        fi
+
         version=0.113.1
 
         case "${RUNNER_OS}-${RUNNER_ARCH}" in
@@ -33,6 +38,7 @@ runs:
             exit 1
             ;;
         esac
+        [ "$(uname -m)" = "riscv64" ] && platform="riscv64gc-unknown-linux-gnu"
 
         mkdir -p ~/.nushell
         gh -R nushell/nushell release download "$version" -p "*-${platform}.tar.gz" -O - \

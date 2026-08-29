@@ -56,7 +56,7 @@ runs:
           /Users/runner/hostedtoolcache &
 
     - name: prepare remote builder config
-      if: ${{ inputs.builders != '' && inputs.ssh-key != '' }}
+      if: ${{ inputs.builders != '' && inputs.ssh-key != '' && inputs.system != 'riscv64-linux' }}
       env:
         BUILDERS: ${{ inputs.builders }}
         SSH_KEY: ${{ inputs.ssh-key }}
@@ -84,6 +84,7 @@ runs:
           ${{ inputs.extra-nix-config }}
 
     - name: create build-dir
+      if: inputs.system != 'riscv64-linux'
       shell: bash
       run: sudo mkdir -p /nix/build
 
